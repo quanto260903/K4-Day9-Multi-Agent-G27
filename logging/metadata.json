@@ -1,0 +1,12 @@
+{
+  "model_name": "qwen2.5:7b-instruct",
+  "model_parameters_billion": 7.0,
+  "framework": "Ollama",
+  "runtime": "local",
+  "ollama_base_url": "http://localhost:11434",
+  "ollama_available_at_run": false,
+  "policy_version": "EC_POLICY_V2",
+  "python_version": "3.14.6",
+  "case_count": 50,
+  "run_duration_seconds": 0.17
+}
