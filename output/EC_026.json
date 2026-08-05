@@ -36,9 +36,9 @@
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "",
+    "delivered_at": null,
     "estimated_delivery_at": "2017-08-04 00:00:00",
-    "carrier_handoff_at": "",
+    "carrier_handoff_at": null,
     "delivery_variance_hours": null,
     "seller_handoff_analysis": [
       {

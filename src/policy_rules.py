@@ -109,7 +109,11 @@ def build_resolution_actions(primary_issue: str, case_status: str, secondary_iss
         actions.append("review_seller_handoff")
     elif primary_issue == "late_delivery_logistics":
         actions.append("review_carrier_delay")
-    if case_status == "action_required":
+    # verify_refund_completion đi kèm issue_full_refund (canceled/unavailable),
+    # KHÔNG áp dụng cho refund_freight — khớp ví dụ README mục 6, case
+    # late_delivery_seller action_required nhưng resolution_actions không có
+    # verify_refund_completion.
+    if PRIMARY_TO_ACTION[primary_issue] == "issue_full_refund":
         actions.append("verify_refund_completion")
     if "multi_seller_order" in secondary_issues:
         actions.append("coordinate_multi_seller_case")

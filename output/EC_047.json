@@ -37,7 +37,7 @@
     ]
   },
   "delivery_analysis": {
-    "delivered_at": "",
+    "delivered_at": null,
     "estimated_delivery_at": "2018-03-15 00:00:00",
     "carrier_handoff_at": "2018-02-20 18:58:43",
     "delivery_variance_hours": null,

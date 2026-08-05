@@ -20,10 +20,12 @@ from src import config
 
 def _read_csv(name: str) -> pd.DataFrame:
     path = config.DATA_DIR / name
-    # keep_default_na=False (không na_values bổ sung): ô trống giữ nguyên là
-    # chuỗi rỗng "" thay vì bị pandas suy diễn thành NaN (float), tránh lỗi
-    # kiểu dữ liệu khi các agent xử lý timestamp rỗng (order chưa giao hàng).
-    return pd.read_csv(path, dtype=str, keep_default_na=False)
+    # keep_default_na=False (không na_values bổ sung): tránh pandas tự suy
+    # diễn ô trống thành NaN (float), gây lỗi kiểu dữ liệu khi parse
+    # timestamp. Sau đó tự thay "" -> None để khớp đúng yêu cầu output
+    # "null nếu dữ liệu không có" (không phải chuỗi rỗng).
+    df = pd.read_csv(path, dtype=str, keep_default_na=False)
+    return df.replace({"": None})
 
 
 class DataStore:
