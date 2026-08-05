@@ -33,10 +33,9 @@ class OrderProductAgent(BaseAgent):
                 product_ids.append(product_id)
 
             product = self.store.get_product(product_id) if product_id else None
-            category_pt = product.get("product_category_name") if product else None
-            category_en = self.store.get_category_english(category_pt)
-            if category_en and category_en not in category_names:
-                category_names.append(category_en)
+            category_name = product.get("product_category_name") if product else None
+            if category_name and category_name not in category_names:
+                category_names.append(category_name)
 
         self.log_tool(
             case_id, "get_order_items",

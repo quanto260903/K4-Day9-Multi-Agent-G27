@@ -8,5 +8,5 @@
   "policy_version": "EC_POLICY_V2",
   "python_version": "3.14.6",
   "case_count": 50,
-  "run_duration_seconds": 0.18
+  "run_duration_seconds": 0.28
 }

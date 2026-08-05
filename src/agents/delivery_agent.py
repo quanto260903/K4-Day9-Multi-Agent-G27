@@ -23,6 +23,10 @@ def _parse_dt(value: str | None) -> datetime | None:
         return None
 
 
+def _clean_timestamp(value: str | None) -> str | None:
+    return value or None
+
+
 def _hours_between(later: datetime | None, earlier: datetime | None) -> float | None:
     if later is None or earlier is None:
         return None
@@ -36,9 +40,9 @@ class DeliveryAgent(BaseAgent):
         self.store = store
 
     def run(self, case_id: str, order_id: str, order: dict | None, items: list[dict]) -> dict:
-        delivered_at = order.get("order_delivered_customer_date") if order else None
-        estimated_at = order.get("order_estimated_delivery_date") if order else None
-        carrier_handoff_at = order.get("order_delivered_carrier_date") if order else None
+        delivered_at = _clean_timestamp(order.get("order_delivered_customer_date")) if order else None
+        estimated_at = _clean_timestamp(order.get("order_estimated_delivery_date")) if order else None
+        carrier_handoff_at = _clean_timestamp(order.get("order_delivered_carrier_date")) if order else None
 
         delivery_variance_hours = _hours_between(_parse_dt(delivered_at), _parse_dt(estimated_at))
         carrier_dt = _parse_dt(carrier_handoff_at)
@@ -46,7 +50,7 @@ class DeliveryAgent(BaseAgent):
         seller_earliest_limit: dict[str, str] = {}
         for item in items:
             seller_id = item.get("seller_id")
-            limit = item.get("shipping_limit_date")
+            limit = _clean_timestamp(item.get("shipping_limit_date"))
             if not seller_id or not limit:
                 continue
             if seller_id not in seller_earliest_limit or limit < seller_earliest_limit[seller_id]:

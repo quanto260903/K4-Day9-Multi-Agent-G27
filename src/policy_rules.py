@@ -113,7 +113,7 @@ def build_resolution_actions(primary_issue: str, case_status: str, secondary_iss
     # KHÔNG áp dụng cho refund_freight — khớp ví dụ README mục 6, case
     # late_delivery_seller action_required nhưng resolution_actions không có
     # verify_refund_completion.
-    if PRIMARY_TO_ACTION[primary_issue] == "issue_full_refund":
+    if case_status == "action_required":
         actions.append("verify_refund_completion")
     if "multi_seller_order" in secondary_issues:
         actions.append("coordinate_multi_seller_case")
